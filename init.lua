@@ -2,7 +2,7 @@
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
+ =================================================================== 
 ========                                    .-----.          ========
 ========         .----------------------.   | === |          ========
 ========         |.-""""""""""""""""""-.|   |-----|          ========
@@ -244,6 +244,67 @@ require('lazy').setup({
   'mg979/vim-visual-multi',
   'nvim-tree/nvim-web-devicons',
 
+  {
+    'nvim-tree/nvim-tree.lua',
+    opts = {
+      sort = {
+        sorter = 'case_sensitive',
+      },
+      view = {
+        width = 30,
+      },
+      renderer = {
+        group_empty = true,
+      },
+      filters = {
+        dotfiles = true,
+      },
+    },
+    keys = {
+      {
+        '<leader>ee',
+        function()
+          require('nvim-tree.api').tree.toggle { focus = false }
+        end,
+        desc = '[E]xplorer',
+      },
+      {
+        '<leader>ef',
+        function()
+          require('nvim-tree.api').tree.focus { current_window = true }
+        end,
+        desc = '[E]xplorer [F]ocus',
+      },
+      {
+        '<leader>er',
+        function()
+          require('nvim-tree.api').tree.refresh()
+        end,
+        desc = '[E]xplorer [R]efresh',
+      },
+    },
+  },
+
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    opts = function()
+      local null_ls = require 'null-ls'
+      return {
+        sources = {
+          -- null_ls.builtins.code_actions.eslint,
+          null_ls.builtins.code_actions.eslint_d,
+          -- null_ls.builtins.diagnostics.eslint,
+          -- null_ls.builtins.diagnostics.eslint_d,
+          -- null_ls.builtins.formatting.eslint,
+          -- null_ls.builtins.formatting.eslint_d,
+          null_ls.builtins.formatting.prettier_eslint,
+        },
+      }
+    end,
+  },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite

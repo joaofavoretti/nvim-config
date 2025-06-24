@@ -284,7 +284,21 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvimtools/none-ls-extras.nvim',
+      'nvim-lua/plenary.nvim', -- Required for null-ls
+    },
+    config = function()
+      local null_ls = require 'null-ls'
+      null_ls.setup {
+        sources = {
+          null_ls.builtins.formatting.prettierd,
+        },
+      }
+    end,
+  },
   {
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
